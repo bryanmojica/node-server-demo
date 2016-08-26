@@ -9,8 +9,34 @@ var http = require('http');
 
 var port = 3000;
 
+var messages = [];
+
 function handleRequest(request, response) {
+	
+
+	if ( request.method === 'POST' ) {
+		request.body = '';
+		request.on('data', function (chunk) {
+			console.log('chunk is + ',chunk);
+			request.body += chunk;
+			console.log('req body is +', request.body);
+		});
+		request.on('end', function () {
+			messages.push(request.body);
+			console.log('current store currently holds', messages);
+		});
+		console.log(request.body);
+		response.on('end', function () {
+			if (err) {
+				console.log(err);
+			} else {
+			}
+		});
+	}
+
 	response.end('Ahhhh yes, we are live and listening.');
+
+
 };
 
 var server = http.createServer(handleRequest);
