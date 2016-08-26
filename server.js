@@ -5,20 +5,26 @@
 
 // Restore the functionality of this basic server.
 
-var http = requre('http');
+var http = require('http');
 
 var port = 3000;
-var ip = 127.0.0.1;
 
-var server = http.createServer(function (response, request) {
+function handleRequest(request, response) {
+	response.end('Ahhhh yes, we are live and listening.');
+};
+
+var server = http.createServer(handleRequest);
+
+/*var server = http.createServer(function (response, request) {
 	if (request.method === 'GET') {
-		response.writeHead(200, 'OK', {`Content-Type`: 'text/plain'});
+		response.writeHead(200, 'OK');
 		var data = 'Hello, World!';
 		response.end(data);
 	} else {
-		response.end(404, 'Sorry, I only accept GET requests!');
+		response.writeHead(404, 'Sorry, I only accept GET requests!');
+		response.end();
 	}
-});
-console.log('Listening on http://' + ip + ':' + port);
+});*/
+console.log('Listening on http://localhost:/' + ':' + port);
 
-server.listen(ip, port);
+server.listen(port);
