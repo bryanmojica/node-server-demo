@@ -9,11 +9,13 @@ var http = require('http');
 
 var port = 3000;
 
+var ip = '127.0.0.1';
+
 var messages = [];
 
 function handleRequest(request, response) {
 	
-
+/*
 	if ( request.method === 'POST' ) {
 		request.body = '';
 		request.on('data', function (chunk) {
@@ -32,25 +34,38 @@ function handleRequest(request, response) {
 			} else {
 			}
 		});
-	}
+	}*/
 
 	response.end('Ahhhh yes, we are live and listening.');
 
 
 };
 
-var server = http.createServer(handleRequest);
+/*var server = http.createServer(handleRequest);
+*/
 
-/*var server = http.createServer(function (response, request) {
+/*var server = http.createServer(handleRequest);
+
+
+
+// request always before response
+var handleRequest = function (*/
+
+var server = http.createServer(function (request, response) {
+	console.log(response);
+	console.log('dannys evil is + ', request.method);
 	if (request.method === 'GET') {
 		response.writeHead(200, 'OK');
 		var data = 'Hello, World!';
 		response.end(data);
+		console.log
 	} else {
 		response.writeHead(404, 'Sorry, I only accept GET requests!');
 		response.end();
 	}
-});*/
+});
+
+
 console.log('Listening on http://localhost:/' + ':' + port);
 
 server.listen(port);
